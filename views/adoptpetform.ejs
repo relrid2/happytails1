@@ -177,8 +177,10 @@
                 
                 <div class="form-group">
                     <label>Which pet are you interested in?</label>
-                    <textarea name="petExperience"></textarea>
-                </div>
+                        <select name="pets" id="pets">
+
+                        </select>
+                        </div>
                 
                 <div class="form-group">
                     <label>Tell us about your home environment</label>
@@ -204,10 +206,24 @@
         </div>
     </section>
 
-    <script>
-        // Previous JavaScript remains the same
-        
-        // Add form submission handling
+    <script>        
+
+    const selection = document.getElementById('pets');
+
+    fetch("/getpets", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      pets2 = data.pets;
+
+    });
+
+
+
         document.getElementById('adoptionForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -217,6 +233,8 @@
             formData.forEach((value, key) => {
                 formObject[key] = value;
             });
+
+            console.log(formData);
             
             // Here you would typically send the data to a server
             console.log('Adoption form submitted:', formObject);
@@ -226,6 +244,7 @@
             
             // Reset the form
             this.reset();
+
         });
     </script>
 </body>

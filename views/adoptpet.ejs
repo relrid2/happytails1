@@ -159,9 +159,6 @@ nav ul li a:hover {
     font-family: "DynaPuff", system-ui;
     text-decoration: none;
     font-weight: 600;
-    border-bottom: 2px solid #000;
-    padding-bottom: 2px;
-    transition: all 0.3s;
 }
 
 .view-profile:hover {
@@ -252,6 +249,12 @@ nav ul li a:hover {
     font-size: 1.1rem;
     color: #555;
     margin-bottom: 5px;
+}
+
+.buttonclass{
+    padding: 8px 16px;
+    border-radius: 10px;
+    background-color: #ebc6a1;
 }
 
 .pet-location {
@@ -438,15 +441,15 @@ footer {
         </button>
     </div>
 
-    <main class="pet-grid">
+    <main class="pet-grid" id="pet-grid">
         <!-- Pet Card 1 -->
-        <div class="pet-card" data-pet-id="1">
+        <!-- <div class="pet-card" data-pet-id="1">
             <div class="pet-image">
                 <img src="octabby.webp" alt="Timmy the cat">
             </div>
             <h2>Timmy</h2>
             <a href="#" class="view-profile">Adopt Pet</a>
-        </div>
+        </div> -->
 
         <!-- Pet Card 2 -->
         <!-- <div class="pet-card" data-pet-id="2">
@@ -565,12 +568,12 @@ footer {
 document.addEventListener('DOMContentLoaded', function() {
     // Pet data
     const modal = document.getElementById('pet-modal');
-    const petGrid = document.getElementsByClassName("pet-grid");
+    const petGrid = document.getElementById("pet-grid");
     const closeButton = document.querySelector('.close-button');
     
     // Get all "View profile" links
-    const viewProfileLinks = document.querySelectorAll('.view-profile');
-    let pets2 =  []
+    let viewProfileLinks = document.querySelectorAll('.view-profile');
+    let pets2 =  [];
 
     fetch("/getpets", {
     method: "POST",
@@ -587,49 +590,48 @@ document.addEventListener('DOMContentLoaded', function() {
         const div2 = document.createElement('div');
         const image1 = document.createElement('img');
         const head2 = document.createElement('h2');
+        const button1 = document.createElement('button');
         const a = document.createElement('a');
-        
 
         div.classList = ["pet-card"];
-        div.setAttribute("data-pet-id", pet.id);
-        div2.classList.
-      })
+        div.setAttribute("data-pet-id", pet._id);
+        div2.classList = ["pet-image"];
+        image1.src = pet.petImage;
+        image1.alt = "Pet Image";
+        head2.innerText = pet.petName;
+        a.href="/adoptpetform";
+        a.innerText = "Adopt Pet";
+        a.classList = ["view-profile"];
+        button1.classList = ["buttonclass"];
 
-      console.log("Successfully fetched pets", pets2);
-    });
+        const para1  =  document.createElement('p');
+        const para2  =  document.createElement('p');
+        const para3  =  document.createElement('p');
+        const para4  =  document.createElement('p');
 
+        para1.innerText = `Color: ${pet.petColor}`;
+        para2.innerText = `Location: ${pet.petLocation}`;
+        para3.innerText = `Age: ${pet.petAge}`;
+        para4.innerText = `Weight: ${pet.petWeight}`;
 
+        div2.appendChild(image1);
+        div.appendChild(div2);
+        div.appendChild(head2);
 
+        div.appendChild(para1);
+        div.appendChild(para2);
+        div.appendChild(para3);
+        div.appendChild(para4);
+        button1.appendChild(a);
+        div.appendChild(button1);
 
-    // Get modal elements
+        petGrid.appendChild(div);
+      });
 
-    
-    // Function to open modal with pet details
-    function openModal(petId) {
-        const pet = pets.find(p => p.id === petId);
-        
-        if (pet) {
-            // Update modal content with pet details
-            document.querySelector('.pet-profile-image img').src = pet.image;
-            document.querySelector('.pet-name').textContent = pet.name;
-            document.querySelector('.pet-color').textContent = `Color: ${pet.color}`;
-            document.querySelector('.pet-location').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${pet.location}`;
-            
-            // Update stats
-            const stats = document.querySelectorAll('.stat p');
-            stats[0].textContent = pet.age;
-            stats[1].textContent = pet.weight;
-            stats[2].textContent = pet.gender;
-            
-            // Show modal
-            modal.style.display = 'flex';
-        }
-    }
-    
-    // Add click event to all "View profile" links
-    viewProfileLinks.forEach(link => {
+      viewProfileLinks =  document.querySelectorAll('.view-profile');
+      console.log(viewProfileLinks);
+      viewProfileLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
             const petCard = this.closest('.pet-card');
             const petId = parseInt(petCard.dataset.petId);
             openModal(petId);
@@ -673,6 +675,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+      console.log("Successfully fetched pets", pets2);
+    });
+
+
+
+
+    // Get modal elements
+
+    
+    // Function to open modal with pet details
+
+    
+    // Add click event to all "View profile" links
+    
     
     // const pets = [
     //     {

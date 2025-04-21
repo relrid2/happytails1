@@ -72,7 +72,7 @@ app.get("/", (req, res) => {
 
 app.get("/adoptpet", (req, res)=>{
     res.render("adoptpet");
-})
+});
 
 app.get("/signup", (req, res)=>{
     res.render("signup");
@@ -120,6 +120,7 @@ app.post("/addpet", async (req, res)=>{
         petGender: petgender,
         petWeight: petweight,
         petColor:petcolor,
+        petImage: "",
     })
 
     await newPet.save();
@@ -133,6 +134,17 @@ app.post("/addpet", async (req, res)=>{
 
     res.send("Works");
 });
+
+app.get("/adoptpetform", (req, res)=>{
+    res.render("adoptpetform");
+});
+
+app.post("/adoptpetform", (req, res)=>{
+    const userEmail = req.session.email;
+    const {petId, userId,userName, userPhone, userAddress} = req.body;
+
+    console.log(petId);
+})
 
 app.post("/signin", async(req, res)=>{
     const {email, password}= req.body;
@@ -183,3 +195,11 @@ app.get("/logout", (req, res)=>{
 app.listen(PORT, ()=>{
     console.log(`PORT listening at ${PORT}`);
 });
+
+
+
+
+
+
+
+
