@@ -12,6 +12,7 @@ import { createRouteHandler } from "uploadthing/express";
 import { uploadRouter } from "./uploadthing.js";
 import petModal from "./Models/pets.js";
 import adoptFormModal from "./Models/adoptform.js";
+import vetFormModal from "./Models/vetform.js";
 
 dotenv.config();
 
@@ -87,7 +88,6 @@ app.post("/getpets", async(req,res)=>{
     const pets = await petModal.find({});
 
     if(pets){
-        console.log(pets);
         res.status(200).json({pets});
     }
 
@@ -95,10 +95,6 @@ app.post("/getpets", async(req,res)=>{
 
 app.post("/signup", async (req, res)=>{
     const {name, email, password} = req.body;
-
-    console.log(name);
-    console.log(email);
-    console.log(password);
 
     const user = new UserModel({
         name,
@@ -144,23 +140,21 @@ app.get("/receivedforms", (req, res)=>{
     res.render("receivedforms");
 });
 
-app.post("/receivedforms", async(req, res)=>{
+app.post("/receivedpetforms", async(req, res)=>{
     const forms = await adoptFormModal.find({});
+    console.log(forms);
 
     if(forms){
         res.status(200).json({forms});
     }
 
-    console.log(forms);
 });
 
 app.post("/adoptpetform", async(req, res)=>{
     console.log("Adopt Pet Form");
-    console.log(req.body);
     const data = req.body;
     const {fullName, phone, email, address, age, pets, homeEnvironment, petExperience, agreement} = req.body;
 
-    console.log(data);
 
     const former = new adoptFormModal({
         petId: pets,
@@ -174,7 +168,32 @@ app.post("/adoptpetform", async(req, res)=>{
     });
 
     await former.save();
-})
+});
+
+app.post("/vetcareform", async(req, res)=>{
+    const {vetName, phone, petName, visitDate, reason, agreement} = req.body;
+
+    const vetForm = new vetFormModal({
+        vetName,
+        phone,
+        petName,
+        visitDate,
+        reasondesc: reason
+    });
+    await vetForm.save();
+
+    console.log(req.body);
+});
+
+app.post("/receivedvetforms", async(req, res)=>{
+    const forms = await vetFormModal.find({});
+    console.log(forms);
+
+    if(forms){
+        res.status(200).json({forms});
+    }
+}
+);
 
 app.post("/signin", async(req, res)=>{
     const {email, password}= req.body;
@@ -211,7 +230,11 @@ app.post("/signin", async(req, res)=>{
 
 app.get("/addpets", (req, res)=>{
     res.render("addpets");
-})
+});
+
+app.get("/vetcare", (req, res)=>{
+    res.render("vetcare");
+});
 
 app.get("/logout", (req, res)=>{
     req.session.destroy((err)=>{
@@ -220,7 +243,11 @@ app.get("/logout", (req, res)=>{
         }
         res.redirect("/");
     })
-})
+});
+
+app.get("/vetcareform", (req, res)=>{
+    res.render("vetcareform");
+});
 
 app.listen(PORT, ()=>{
     console.log(`PORT listening at ${PORT}`);

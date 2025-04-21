@@ -100,11 +100,7 @@
         }
         
         /* Two-column layout for some fields */
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+   
     </style>
 </head>
 <body>
@@ -132,10 +128,7 @@
                 </div>
                 
                 <div class="form-row">
-                    <div class="form-group">
-                        <label class="required-field">Pet ID</label>
-                        <input type="text" name="petId" required>
-                    </div>
+                
                     
                     <div class="form-group">
                         <label class="required-field">Pet Name</label>
@@ -193,6 +186,14 @@
             formData.forEach((value, key) => {
                 formObject[key] = value;
             });
+
+            fetch("vetcareform", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formObject)
+            })
             
             // Here you would typically send the data to a server
             console.log('Appointment form submitted:', formObject);
