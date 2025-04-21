@@ -124,6 +124,10 @@
             border-radius: 50%;
             margin-right: 15px;
         }
+
+        #pets { 
+            color: black;
+        }
         
         .pet-option input {
             margin-right: 10px;
@@ -178,7 +182,7 @@
                 <div class="form-group">
                     <label>Which pet are you interested in?</label>
                         <select name="pets" id="pets">
-
+                            <option value="" disabled selected>Select a pet</option>
                         </select>
                         </div>
                 
@@ -219,7 +223,12 @@
     .then((res) => res.json())
     .then((data) => {
       pets2 = data.pets;
-
+      pets2.forEach(pet => {
+      const option = document.createElement('option');
+      option.value = pet._id;
+      option.textContent = pet.petName;
+      selection.appendChild(option);
+    });
     });
 
 
@@ -234,16 +243,35 @@
                 formObject[key] = value;
             });
 
+            fetch("/adoptpetform", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formObject),
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                if (data.success) {
+                    alert('Thank you for your adoption application! We will review your information and contact you soon.');
+                } else {
+                    alert('There was an error submitting your application. Please try again later.');
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('There was an error submitting your application. Please try again later.');
+            });
+
             console.log(formData);
             
             // Here you would typically send the data to a server
             console.log('Adoption form submitted:', formObject);
             
-            // Show success message
-            alert('Thank you for your adoption application! We will review your information and contact you soon.');
-            
+            // Show success message            
             // Reset the form
-            this.reset();
+            // this.reset();
 
         });
     </script>

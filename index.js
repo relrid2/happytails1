@@ -11,6 +11,7 @@ import nodemailer from "nodemailer"
 import { createRouteHandler } from "uploadthing/express";
 import { uploadRouter } from "./uploadthing.js";
 import petModal from "./Models/pets.js";
+import adoptFormModal from "./Models/adoptform.js";
 
 dotenv.config();
 
@@ -139,11 +140,40 @@ app.get("/adoptpetform", (req, res)=>{
     res.render("adoptpetform");
 });
 
-app.post("/adoptpetform", (req, res)=>{
-    const userEmail = req.session.email;
-    const {petId, userId,userName, userPhone, userAddress} = req.body;
+app.get("/receivedforms", (req, res)=>{
+    res.render("receivedforms");
+});
 
-    console.log(petId);
+app.post("/receivedforms", async(req, res)=>{
+    const forms = await adoptFormModal.find({});
+
+    if(forms){
+        res.status(200).json({forms});
+    }
+
+    console.log(forms);
+});
+
+app.post("/adoptpetform", async(req, res)=>{
+    console.log("Adopt Pet Form");
+    console.log(req.body);
+    const data = req.body;
+    const {fullName, phone, email, address, age, pets, homeEnvironment, petExperience, agreement} = req.body;
+
+    console.log(data);
+
+    const former = new adoptFormModal({
+        petId: pets,
+        userName: fullName,
+        userPhone: phone,
+        userEmail: email,
+        userAddress: address,
+        userAge: age,
+        homedesc: homeEnvironment,
+        petexpdesc: petExperience, 
+    });
+
+    await former.save();
 })
 
 app.post("/signin", async(req, res)=>{

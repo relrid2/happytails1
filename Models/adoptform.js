@@ -14,10 +14,6 @@ const adoptFormModalSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    userId: {
-        type: String,
-        required: false,
-    },
     userName: {
         type: String,
         required: true
