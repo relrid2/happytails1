@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Tails - Pet Adoption</title>
+   
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+ 
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f2e0cb;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #f2e0cb ;
+    color: black;;
+   
+    
+}
+
+.logo h1 {
+    font-size: 2 rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    font-family: 'Chewy', cursive;
+    color:white;
+}
+
+.logo i {
+    margin-left: 8px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 1.5rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: color 0.3s;
+    color: black;;
+}
+
+nav ul li a:hover {
+    color:#333;
+}
+
+.highlighted {
+    color: #2b3334c0;
+    font-weight: 600;
+}
+
+.search-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    display: flex;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    font-size: 1rem;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.search-button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background-color: #d2a679;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 0 2rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pet-card {
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px);
+}
+
+.pet-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+    font-family: "DynaPuff", system-ui;
+}
+
+.pet-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pet-card h2 {
+    font-family: "DynaPuff", system-ui;
+    margin: 1rem 0;
+    font-size: 1.8rem;
+    color: #333;
+    text-align: center;
+}
+
+.view-profile {
+    color: #000;
+    font-family: "DynaPuff", system-ui;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid #000;
+    padding-bottom: 2px;
+    transition: all 0.3s;
+}
+
+.view-profile:hover {
+    color: #8b4513;
+    border-color: #8b4513;
+}
+
+/* Modal Styles - Exactly matching the second screenshot */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #f2e0cb;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #000;
+    z-index: 10;
+    background-color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.pet-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 20px 0;
+    font-family: "DynaPuff", system-ui;
+}
+
+.pet-profile-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    font-family: "DynaPuff", system-ui;
+}
+
+.pet-profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    font-family: "DynaPuff", system-ui;
+}
+
+.pet-name {
+    font-family: "DynaPuff", system-ui;
+    font-size: 2rem;
+    color: #8b4513;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.pet-details {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.pet-color {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.pet-location {
+    font-size: 1.1rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.pet-stats {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-family: "DynaPuff", system-ui;
+}
+
+.stat i {
+    font-size: 1.5rem;
+    color: #888;
+}
+
+.stat p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    
+}
+
+.adopt-button {
+    background-color: #f2e0cb;
+    color: #8b4513;
+    border: 2px solid #8b4513;
+    padding: 12px 30px;
+    padding-left: 100px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+    width: 80%;
+}
+
+.adopt-button:hover {
+    background-color: #8b4513;
+    color: white;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 3rem 5% 1rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-logo h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-family: chewy,italics;
+}
+
+.footer-logo p {
+    color: #ccc;
+}
+
+.footer-links h3,
+.footer-contact h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.footer-links h3::after,
+.footer-contact h3::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 2px;
+    background-color: #4ECDC4;
+    bottom: -5px;
+    left: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links ul li a {
+    color: #ccc;
+    transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+    color: #4ECDC4;
+}
+
+.footer-contact p {
+    color: #ccc;
+    margin-bottom: 0.5rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    nav ul {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav ul li {
+        margin: 0.5rem;
+    }
+    
+    .pet-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        padding: 0 1rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pet-stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .stat {
+        flex-direction: row;
+        gap: 10px;
+    }
+}
+
+
+</style>
+
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Happy Tails<span class="paw">🐾</span></h1>
+           
+        </div>
+        <nav>
+            <ul>
+                <li><a href="hME.html" class="active">Home</a></li>
+                <li><a href="#" class="highlighted">Adopt Pet</a></li>
+                <li><a href="VETTTTTT.html">Vet Care</a></li>
+                <li><a href="#">Success Stories</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <div class="search-container">
+        <input type="text" placeholder="Search..." class="search-input">
+        <button class="search-button">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+
+    <main class="pet-grid">
+        <!-- Pet Card 1 -->
+        <div class="pet-card" data-pet-id="1">
+            <div class="pet-image">
+                <img src="octabby.webp" alt="Timmy the cat">
+            </div>
+            <h2>Timmy</h2>
+            <a href="#" class="view-profile">Adopt Pet</a>
+        </div>
+
+        <!-- Pet Card 2 -->
+        <!-- <div class="pet-card" data-pet-id="2">
+            <div class="pet-image">
+                <img src="gr.jpg" alt="Coco the dog">
+            </div>
+            <h2>Coco</h2>
+            <a href="#" class="view-profile">View profile</a>
+        </div>
+
+        <div class="pet-card" data-pet-id="3">
+            <div class="pet-image">
+                <img src="sh.jpg" alt="Juni the dog">
+            </div>
+            <h2>Juni</h2>
+            <a href="#" class="view-profile">View profile</a>
+        </div>
+
+        <div class="pet-card" data-pet-id="4">
+            <div class="pet-image">
+                <img src="k.jpg" alt="Golden Retriever">
+            </div>
+            <h2>Buddy</h2>
+            <a href="#" class="view-profile">View profile</a>
+        </div>
+
+        <div class="pet-card" data-pet-id="5">
+            <div class="pet-image">
+                <img src="cat2.avif" alt="Gray cat">
+            </div>
+            <h2>Whiskers</h2>
+            <a href="#" class="view-profile">View profile</a>
+        </div>
+
+        <div class="pet-card" data-pet-id="6">
+            <div class="pet-image">
+                <img src="l.jpg" alt="Black cat">
+            </div>
+            <h2>Shadow</h2>
+            <a href="#" class="view-profile">View profile</a>
+        </div> -->
+    </main>
+
+    <!-- Pet Profile Modal -->
+    <div class="modal" id="pet-modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="pet-profile">
+                <div class="pet-profile-image">
+                    <img src="octabby.webp" alt="Pet profile image">
+                </div>
+                <h2 class="pet-name">Timmy</h2>
+                <div class="pet-details">
+                    <p class="pet-color">Color: Orange and White</p>
+                    <p class="pet-location"><i class="fas fa-map-marker-alt"></i> Karnataka, India</p>
+                </div>
+                <div class="pet-stats">
+                    <div class="stat">
+                        <i class="fas fa-heartbeat"></i>
+                        <p>1 Year</p>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-weight"></i>
+                        <p>3.6 kg</p>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-venus-mars"></i>
+                        <p>F</p>
+                    </div>
+                </div>
+                <a href="adoptappl.html"  class="adopt-button">Adopt Me!</a>
+            </div>
+        </div>
+    </div>
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo">
+            <h2>Happy Tails <span class="paw">🐾</span></h2>
+            <p>Caring for your pets like family</p>
+        </div>
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#adopt">Adopt Pet</a></li>
+                <li><a href="#vet-care">Vet Care</a></li>
+                <li><a href="#success">Success Stories</a></li>
+                
+            </ul>
+        </div>
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>123 Pet Care Lane</p>
+            <p>Pawsville, PC 12345</p>
+            <p>Phone no.: 1234567891</p>
+            <p>Email: happytails@gmail.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Happy Tails. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Service Popups -->
+<div class="popup-overlay" id="popup-overlay">
+    <div class="popup" id="popup">
+        <div class="popup-close" id="popup-close">&times;</div>
+        <div class="popup-content" id="popup-content">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+    </div>
+</div>
+    <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Pet data
+    const modal = document.getElementById('pet-modal');
+    const petGrid = document.getElementsByClassName("pet-grid");
+    const closeButton = document.querySelector('.close-button');
+    
+    // Get all "View profile" links
+    const viewProfileLinks = document.querySelectorAll('.view-profile');
+    let pets2 =  []
+
+    fetch("/getpets", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      pets2 = data.pets;
+
+      pets2.forEach((pet)=>{
+        const div = document.createElement('div');
+        const div2 = document.createElement('div');
+        const image1 = document.createElement('img');
+        const head2 = document.createElement('h2');
+        const a = document.createElement('a');
+        
+
+        div.classList = ["pet-card"];
+        div.setAttribute("data-pet-id", pet.id);
+        div2.classList.
+      })
+
+      console.log("Successfully fetched pets", pets2);
+    });
+
+
+
+
+    // Get modal elements
+
+    
+    // Function to open modal with pet details
+    function openModal(petId) {
+        const pet = pets.find(p => p.id === petId);
+        
+        if (pet) {
+            // Update modal content with pet details
+            document.querySelector('.pet-profile-image img').src = pet.image;
+            document.querySelector('.pet-name').textContent = pet.name;
+            document.querySelector('.pet-color').textContent = `Color: ${pet.color}`;
+            document.querySelector('.pet-location').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${pet.location}`;
+            
+            // Update stats
+            const stats = document.querySelectorAll('.stat p');
+            stats[0].textContent = pet.age;
+            stats[1].textContent = pet.weight;
+            stats[2].textContent = pet.gender;
+            
+            // Show modal
+            modal.style.display = 'flex';
+        }
+    }
+    
+    // Add click event to all "View profile" links
+    viewProfileLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const petCard = this.closest('.pet-card');
+            const petId = parseInt(petCard.dataset.petId);
+            openModal(petId);
+        });
+    });
+    
+    // Close modal when clicking the close button
+    closeButton.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+    
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    
+    // Search functionality
+    const searchInput = document.querySelector('.search-input');
+    const searchButton = document.querySelector('.search-button');
+    
+    function performSearch() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const petCards = document.querySelectorAll('.pet-card');
+        
+        petCards.forEach(card => {
+            const petName = card.querySelector('h2').textContent.toLowerCase();
+            if (petName.includes(searchTerm)) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+    
+    searchButton.addEventListener('click', performSearch);
+    searchInput.addEventListener('keyup', function(e) {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+
+    
+    // const pets = [
+    //     {
+    //         id: 1,
+    //         name: 'Timmy',
+    //         image: 'octabby.webp',
+    //          color: 'Orange and White',
+    //         location: 'Karnataka, India',
+    //         age: '1 Year',
+    //         weight: '3.6 kg',
+    //         gender: 'F'
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Coco',
+    //         image: 'gr.jpg',
+    //         profileImage: 'gr.jpg',
+    //         color: 'Golden',
+    //         location: 'Mumbai, India',
+    //         age: '2 Years',
+    //         weight: '25 kg',
+    //         gender: 'M'
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'Juni',
+    //         image: 'sh.jpg',
+    //         profileImage: 'sh.jpg',
+    //         color: 'Black and Gray',
+    //         location: 'Delhi, India',
+    //         age: '3 Years',
+    //         weight: '15 kg',
+    //         gender: 'M'
+    //     },
+    // ];
+});
+
+
+    </script>
+</body>
+</html>

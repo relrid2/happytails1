@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Tails - Pet Care Services</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+FR+Moderne+Guides&display=swap" rel="stylesheet">
+
+</head>
+<style>
+    /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Header and Navigation */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: black;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    font-family: 'Chewy', cursive;
+}
+
+.paw {
+    color: #b5c5c4;
+}
+
+nav ul {
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 2rem;
+}
+
+nav ul li a {
+    font-weight: 500;
+    color:black;
+   
+    position: relative;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #293332;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #364544;
+    bottom: -5px;
+    left: 0;
+    
+}
+
+
+
+/* Hero Section - Updated */
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
+    z-index: 1;
+}
+
+.hero h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+    max-width: 600px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero h3 {
+    font-family: "PT Sans", sans-serif;
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: white;
+    max-width: 600px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+
+/* Services Section */
+.services {
+    padding: 5rem 5%;
+    text-align: center;
+    background-color: white;
+}
+
+.services h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.services p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.service-icons {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-item {
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.service-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-item h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Pet Care Gallery */
+.pet-care {
+    padding: 5rem 5%;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.pet-care h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.pet-care p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* About Section */
+.about {
+    padding: 5rem 5%;
+    background-color: white;
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: #333;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.about-image {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 3rem 5% 1rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-logo h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-family: 'Chewy', cursive;
+}
+
+.footer-logo p {
+    color: #ccc;
+}
+
+.footer-links h3,
+.footer-contact h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.footer-links h3::after,
+.footer-contact h3::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 2px;
+    background-color: #4ECDC4;
+    bottom: -5px;
+    left: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links ul li a {
+    color: #ccc;
+    transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+    color: #4ECDC4;
+}
+
+.footer-contact p {
+    color: #ccc;
+    margin-bottom: 0.5rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Popup Styles */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup {
+    background-color: white;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    padding: 2rem;
+    position: relative;
+    transform: scale(0.8);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.popup-overlay.active .popup {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.popup-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.popup-close:hover {
+    color: #4ECDC4;
+}
+
+.popup-content {
+    margin-top: 1rem;
+}
+
+.popup-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #4ECDC4;
+}
+
+.popup-content p {
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.popup-content img {
+    width: 50%;
+    border-radius: 5px;
+    margin: 1rem 0;
+}
+
+.popup-content h4 {
+    font-size: 1.2rem;
+    margin: 1.5rem 0 1rem;
+    color: #333;
+}
+
+.popup-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.popup-content ul li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    list-style-type: none;
+}
+
+.popup-content ul li:before {
+    content: '•';
+    color: #4ECDC4;
+    font-weight: bold;
+    position: absolute;
+    left: -1rem;
+}
+
+/* Extract the service icons from the image */
+.service-icon {
+    background: url('s1.png') no-repeat;
+    background-position: 0 0;
+    background-size: 100%;
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto 1rem;
+}
+
+.service-icon-call {
+    background: url('s2.png') no-repeat;
+    background-position: 33.33% 0;
+    background-size: 100%;
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto 1rem;
+}
+
+.service-icon-award {
+    background: url('s3.png') no-repeat;
+    background-position: 66.66% 0;
+    background-size: 100%;
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto 1rem;
+}
+
+.service-icon-experts {
+    background: url('s4.png') no-repeat;
+    background-position: 100% 0;
+    background-size: 100%;
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero-content {
+        padding: 0 5%;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 100%);
+        align-items: center;
+        text-align: center;
+    }
+    
+    .hero h2 {
+        font-size: 3rem;
+    }
+    
+    .hero h3 {
+        font-size: 1.5rem;
+    }
+    
+    .about-content {
+        flex-direction: column;
+    }
+    
+    .service-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    nav ul {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav ul li {
+        margin: 0.5rem;
+    }
+    
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+    }
+}
+.adopt-button {
+    background-color: #eee5dd;
+    color: #ce966f;
+    border: 2px solid #9b5d30;
+    padding: 20px 30px;
+    padding-left: 20px;
+    border-radius: 50px;
+    font-size: 1 rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    width: 20%;
+}
+
+.adopt-button:hover {
+    background-color: #784f31;
+    color: white;
+}
+
+@media (max-width: 480px) {
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    .hero h3 {
+        font-size: 1.2rem;
+    }
+    
+    .services h2,
+    .pet-care h2,
+    .about h2 {
+        font-size: 2rem;
+    }
+}
+</style>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="logo">
+            <h1>Happy Tails <span class="paw">🐾</span></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#adopt">Adopt Pet</a></li>
+                <li><a href="#vet-care">Vet Care</a></li>
+                <li><a href="#success">Success Stories</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <img src="vetbg.png" alt="Cat being held by veterinarian">
+        </div>
+        <div class="hero-content">
+            <h2>Refining the world</h2>
+            <h3>One pet at a time</h3>
+            <a href="vetappt.html"  class="adopt-button">book appointment!</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="vet-care" class="services">
+        <h2>Our Veterinary Services</h2>
+        <p>We provide comprehensive care for your beloved pets</p>
+        
+        <div class="service-icons">
+            <div class="service-item" data-service="diagnostics">
+                <div class="service-icon"></div>
+                <h3>Full Diagnostics</h3>
+            </div>
+            
+            <div class="service-item" data-service="call">
+                <div class="service-icon-call"></div>
+                <h3>00-24 Call</h3>
+            </div>
+            
+            <div class="service-item" data-service="awarded">
+                <div class="service-icon-award"></div>
+                <h3>Awarded Service</h3>
+            </div>
+            
+            <div class="service-item" data-service="experts">
+                <div class="service-icon-experts"></div>
+                <h3>The Best Experts</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pet Care Gallery -->
+    <section id="pet-care" class="pet-care">
+        <h2>Compassionate Pet Care</h2>
+        <p>Our team of veterinarians provides the highest quality care for your pets</p>
+        
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="vet1.jpg" alt="Veterinarian with dog and cat">
+            </div>
+            <div class="gallery-item">
+                <img src="vet3.jpg" alt="Cat being scanned">
+            </div>
+            <div class="gallery-item">
+                <img src="vet4.jpg" alt="Veterinarian with small dog">
+            </div>
+            <div class="gallery-item">
+                <img src="vet6.jpg" alt="Veterinarian with cat">
+            </div>
+            <div class="gallery-item">
+                <img src="vet5.jpg" alt="Veterinarian with large dog">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <h2>Why Choose Happy Tails?</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>At Happy Tails, we believe that every pet deserves the best care possible. Our team of experienced veterinarians and staff are dedicated to providing comprehensive healthcare services for your beloved companions.</p>
+                <p>With state-of-the-art facilities and a compassionate approach, we ensure that your pets receive the highest quality of care in a comfortable and stress-free environment.</p>
+                
+            </div>
+            <div class="about-image">
+                <img src="vetimage.png" alt="Veterinarian with pets">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>Happy Tails <span class="paw">🐾</span></h2>
+                <p>Caring for your pets like family</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#adopt">Adopt Pet</a></li>
+                    <li><a href="#vet-care">Vet Care</a></li>
+                    <li><a href="#success">Success Stories</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>123 Pet Care Lane</p>
+                <p>Pawsville, PC 12345</p>
+                <p>Phone no.: 1234567891</p>
+                <p>Email: happytails@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Happy Tails. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Service Popups -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup" id="popup">
+            <div class="popup-close" id="popup-close">&times;</div>
+            <div class="popup-content" id="popup-content">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script >
+document.addEventListener('DOMContentLoaded', function() {
+    // Navigation active state
+    const navLinks = document.querySelectorAll('nav ul li a');
+    const sections = document.querySelectorAll('section');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (pageYOffset >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    // Smooth scrolling for navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            window.scrollTo({
+                top: targetSection.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // Service popup functionality
+    const serviceItems = document.querySelectorAll('.service-item');
+    const popupOverlay = document.getElementById('popup-overlay');
+    const popup = document.getElementById('popup');
+    const popupClose = document.getElementById('popup-close');
+    const popupContent = document.getElementById('popup-content');
+    
+    // Service information
+    const serviceInfo = {
+        diagnostics: {
+            title: 'Full Diagnostics',
+            description: 'Our comprehensive diagnostic services include blood work, X-rays, ultrasounds, and more to ensure accurate diagnosis and effective treatment plans for your pets.',
+            image: 's1.png',
+            details: [
+                'Complete blood count and chemistry panels',
+                'Digital radiography for detailed imaging',
+                'Ultrasound examinations',
+                'Electrocardiograms for heart monitoring',
+                'In-house laboratory for quick results'
+            ]
+        },
+        call: {
+            title: '00-24 Call Service',
+            description: 'Our 24/7 emergency call service ensures that your pets receive immediate attention whenever they need it, day or night.',
+            image: 's2.png',
+            details: [
+                'Round-the-clock emergency response',
+                'Immediate phone consultations',
+                'Urgent care appointments',
+                'After-hours treatment options',
+                'Emergency surgery capabilities'
+            ]
+        },
+        awarded: {
+            title: 'Awarded Service',
+            description: 'Our veterinary practice has been recognized with multiple awards for excellence in pet care, customer service, and innovative treatment approaches.',
+            image: 's3.png',
+            details: [
+                'Best Veterinary Practice 2024',
+                'Excellence in Pet Care Award',
+                'Top-rated customer satisfaction',
+                'Innovative Treatment Recognition',
+                'Community Service Award'
+            ]
+        },
+        experts: {
+            title: 'The Best Experts',
+            description: 'Our team consists of highly qualified veterinarians and specialists who are experts in their fields, ensuring the best possible care for your beloved pets.',
+            image: 's4.png',
+            details: [
+                'Board-certified veterinary specialists',
+                'Continuous professional education',
+                'Specialized training in various fields',
+                'Years of hands-on experience',
+                'Compassionate approach to pet care'
+            ]
+        }
+    };
+    
+    // Open popup when service item is clicked
+    serviceItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const serviceType = this.getAttribute('data-service');
+            const service = serviceInfo[serviceType];
+            
+            // Create popup content
+            let content = `
+                <h3>${service.title}</h3>
+                <p>${service.description}</p>
+                <img src="${service.image}" alt="${service.title}">
+                <h4>Our ${service.title} includes:</h4>
+                <ul>
+            `;
+            
+            service.details.forEach(detail => {
+                content += `<li>${detail}</li>`;
+            });
+            
+          ;
+            
+            popupContent.innerHTML = content;
+            
+            // Show popup
+            popupOverlay.classList.add('active');
+        });
+    });
+    
+    // Close popup when close button is clicked
+    popupClose.addEventListener('click', function() {
+        popupOverlay.classList.remove('active');
+    });
+    
+    // Close popup when clicking outside the popup
+    popupOverlay.addEventListener('click', function(e) {
+        if (e.target === popupOverlay) {
+            popupOverlay.classList.remove('active');
+        }
+    });
+    
+    // Close popup when ESC key is pressed
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && popupOverlay.classList.contains('active')) {
+            popupOverlay.classList.remove('active');
+        }
+    });
+    
+    // Add event listener for CTA buttons
+    document.querySelectorAll('.cta-button').forEach(button => {
+        button.addEventListener('click', function() {
+            alert('Thank you for your interest! This would redirect to a contact form in a real application.');
+        });
+    });
+});
+
+
+
+    </script>
+</body>
+</html>

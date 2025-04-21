@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Tails - Book Vet Appointment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Playwrite+FR+Moderne+Guides&display=swap" rel="stylesheet">
+    <style>
+        /* Previous styles remain the same */
+        
+        /* Updated styles for appointment booking form */
+        .appointment-form-section {
+            padding: 60px 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f5e6d8;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .form-title {
+            font-family: "Chewy", system-ui;
+            font-size: 32px;
+            color: #8B4513;
+            margin-bottom: 25px;
+        }
+        
+        .appointment-form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            text-align: left;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #5a3921;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 15px;
+            border: 2px solid #d9b08c;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #fff;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #8B4513;
+            outline: none;
+        }
+        
+        .required-field::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        .submit-btn {
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: "Chewy", system-ui;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #6d3610;
+        }
+        
+        .form-note {
+            font-size: 14px;
+            color: #666;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        /* Two-column layout for some fields */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header and previous sections remain the same -->
+    
+    <!-- Appointment Booking Form Section -->
+    <section class="appointment-form-section">
+        <div class="form-container">
+            <h2 class="form-title">Book Vet Appointment</h2>
+            <form class="appointment-form" id="appointmentForm">
+                <div class="form-group">
+                    <label class="required-field">Vet Name</label>
+                    <select name="vetName" required>
+                        <option value="">Select a vet</option>
+                        <option value="Dr. Smith">Dr. Smith</option>
+                        <option value="Dr. Johnson">Dr. Johnson</option>
+                        <option value="Dr. Williams">Dr. Williams</option>
+                        <option value="Dr. Brown">Dr. Brown</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="required-field">Phone Number</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="required-field">Pet ID</label>
+                        <input type="text" name="petId" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required-field">Pet Name</label>
+                        <input type="text" name="petName" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required-field">Visit Date</label>
+                    <input type="date" name="visitDate" required min="">
+                </div>
+               
+                
+                <div class="form-group">
+                    <label>Reason for Visit</label>
+                    <select name="reason">
+                        <option value="">Select a reason</option>
+                        <option value="Routine Checkup">Routine Checkup</option>
+                        <option value="Vaccination">Vaccination</option>
+                        <option value="Illness">Illness</option>
+                        <option value="Injury">Injury</option>
+                        <option value="Dental Check">Dental Check</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                
+               
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="agreement" required>
+                        I confirm that the information provided is accurate
+                    </label>
+                </div>
+                
+                <button type="submit" class="submit-btn">Book Appointment</button>
+                
+                <p class="form-note">We'll confirm your appointment via sms .</p>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Set minimum date to today
+        document.querySelector('input[name="visitDate"]').min = new Date().toISOString().split('T')[0];
+        
+        // Form submission handling
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+            
+            // Here you would typically send the data to a server
+            console.log('Appointment form submitted:', formObject);
+            
+            // Show success message
+            alert('Appointment booked successfully! We will send you a confirmation shortly.');
+            
+            // Reset the form
+            this.reset();
+        });
+    </script>
+</body>
+</html>

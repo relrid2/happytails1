@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Tails - Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-image: url('k.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+        }
+
+
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            width: 100%;
+            position: fixed; 
+            top: 0;
+            left: 0;
+            z-index: 1000; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: "Chewy", system-ui;
+            font-weight: 400;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .paw-icon {
+            font-size: 24px;
+            margin-left: 10px;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #8B4513;
+        }
+
+        .home-icon {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .signup-container {
+            background-color: rgba(222, 196, 153, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 30px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 150px;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .signup-header h1 {
+            font-family: 'Chewy', cursive;
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .signup-header h2 {
+            font-size: 24px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 30px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4a6741;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-group input {
+            margin-top: 5px;
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            accent-color: #4a6741;
+        }
+
+        .checkbox-group label {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .checkbox-group a {
+            color: #333;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .checkbox-group a:hover {
+            color: #4a6741;
+        }
+
+        .sign-up-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .sign-up-btn:hover {
+            background-color: #222;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .login-link a {
+            color: #333;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .login-link a:hover {
+            color: #4a6741;
+        }
+
+        @media (max-width: 480px) {
+            .signup-container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .signup-header h1 {
+                font-size: 32px;
+            }
+
+            .signup-header h2 {
+                font-size: 20px;
+            }
+        }
+        footer {
+    background-color: #333;
+    color: white;
+    padding: 3rem 5% 1rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-logo h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-family: chewy,italics;
+}
+
+.footer-logo p {
+    color: #ccc;
+}
+.footer-links h3,
+.footer-contact h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.footer-links h3::after,
+.footer-contact h3::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 2px;
+    background-color: #4ECDC4;
+    bottom: -5px;
+    left: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links ul li a {
+    color: #ccc;
+    transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+    color: #4ECDC4;
+}
+
+.footer-contact p {
+    color: #ccc;
+    margin-bottom: 0.5rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Happy Tails</h1>
+            <span class="paw-icon">🐾</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Adopt Pet</a></li>
+                <li><a href="#">Vet Care</a></li>
+                <li><a href="#">Success Stories</a></li>
+            
+            </ul>
+        </nav>
+    </header>
+
+    <div class="signup-container">
+        <div class="signup-header">
+           
+            <h2>Create Your Account</h2>
+        </div>
+
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                <div class="error-message" id="nameError">Please enter your name</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <div class="error-message" id="passwordError">Password must be at least 8 characters</div>
+            </div>
+        <button type="submit" class="sign-up-btn">SIGN UP</button>
+        </form>
+
+        <div class="login-link">
+            Already have an account? <a href="signin">Log In</a>
+        </div>
+    </div>
+     <!-- Footer -->
+     <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>Happy Tails <span class="paw">🐾</span></h2>
+                <p>Caring for your pets like family</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#adopt">Adopt Pet</a></li>
+                    <li><a href="#vet-care">Vet Care</a></li>
+                    <li><a href="#success">Success Stories</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>123 Pet Care Lane</p>
+                <p>Pawsville, PC 12345</p>
+                <p>Phone no.: 1234567891</p>
+                <p>Email: happytails@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Happy Tails. All rights reserved.</p>
+        </div>
+    </footer>
+  
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Reset error messages
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(msg => {
+                msg.style.display = 'none';
+            });
+            
+            let isValid = true;
+            
+           
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+           
+            
+            // Validate name
+            if (name === '') {
+                document.getElementById('nameError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate password (at least 8 characters)
+            if (password.length < 8) {
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            }
+            
+            
+            
+            // If all validations pass
+            if (isValid) {
+                // data to a server
+                alert('Account created successfully! You can now log in.');
+                console.log(name);
+                fetch("/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({name, email, password})
+                })
+                .then(()=>{
+                    console.log("Signed Up");
+                })
+                .catch(()=>{
+                    console.log("Error");
+                })
+                
+            }
+        });
+    </script>
+
+</body>
+</html>
